@@ -1,11 +1,12 @@
 import os
 import asyncio
+import signal
 import discord
 from discord.ext import commands
 
-TOKEN   = os.getenv("TOKEN")
+TOKEN    = os.getenv("TOKEN")
 GUILD_ID = int(os.getenv("GUILD_ID"))
-CHANNEL    = int(os.getenv("CHANNEL"))
+CHANNEL  = int(os.getenv("CHANNEL"))
 PREFIX   = "!"
 
 intents = discord.Intents.all()
@@ -23,8 +24,15 @@ async def stay_in_vc():
         try:
             if not guild.voice_client or not guild.voice_client.is_connected():
                 await channel.connect()
+                print("Reconectado ao canal de voz.")
         except Exception as e:
-            print(e)
-        await asyncio.sleep(5)
+            pass  # silencioso
+        await asyncio.sleep(2)
 
+# ---------- ignora SIGTERM/SIGINT ----------
+import signal
+for s in (signal.SIGINT, signal.SIGTERM):
+    signal.signal(s, signal.SIG_IGN)
+
+# ---------- start (único "run") ----------
 bot.run(TOKEN)
