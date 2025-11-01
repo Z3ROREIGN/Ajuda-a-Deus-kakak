@@ -1,2 +1,1 @@
-discord.py-self==2.4.1
-PyNaCl==1.5.0
+git+https://github.com/dolfies/discord.py-self@v2.4.1#egg=discord.py-self[voice]
