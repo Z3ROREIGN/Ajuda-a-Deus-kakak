@@ -1,6 +1,6 @@
 import os
 import asyncio
-import signal       # <-- agora está presente
+import signal
 import discord
 from discord.ext import commands
 
@@ -25,13 +25,12 @@ async def stay_in_vc():
         try:
             if guild.voice_client is None or not guild.voice_client.is_connected():
                 await channel.connect()
-                print("Reconectado no canal de voz:", channel.name)
-        except Exception as e:
-            print("Erro ao reconectar:", e)
+        except Exception:
+            pass
         await asyncio.sleep(5)
 
-# ignora SIGTERM/SIGINT para Railway não matar antes da hora
+# ignora SIGTERM/SIGINT para Railway não matar o container
 for s in (signal.SIGINT, signal.SIGTERM):
     signal.signal(s, signal.SIG_IGN)
 
-bot.run(TOKEN)# ---------- start (único "run") ----------
+bot.run(TOKEN)bot.run(TOKEN)# ---------- start (único "run") ----------
