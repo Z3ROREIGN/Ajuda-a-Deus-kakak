@@ -1,1 +1,1 @@
-git+https://github.com/dolfies/discord.py-self@v2.4.1#egg=discord.py-self[voice]
+discord.py-self[voice]==2.4.1
