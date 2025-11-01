@@ -5,7 +5,7 @@ from discord.ext import commands
 
 TOKEN   = os.getenv("TOKEN")          # Variável no Railway
 GUILD_ID = int(os.getenv("GUILD_ID"))  # ID do servidor
-VC_ID    = int(os.getenv("VC_ID"))     # ID do canal de voz
+CHANNEL   = int(os.getenv("CHANNEL"))     # ID do canal de voz
 PREFIX   = "!"                        # Prefixo para comandos opcionais
 
 intents = discord.Intents.all()
@@ -19,7 +19,7 @@ async def on_ready():
 async def stay_in_vc():
     await bot.wait_until_ready()
     guild   = bot.get_guild(GUILD_ID)
-    channel = guild.get_channel(VC_ID) if guild else None
+    channel = guild.get_channel(CHANNEL) if guild else None
     if not channel:
         print("❌ Canal ou servidor não encontrado.")
         return
