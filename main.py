@@ -54,7 +54,7 @@ if __name__ == "__main__":
     # Se já estiver conectado nessa call, apenas heartbeat
     for vc in client.voice_clients:
         if vc.channel == channel and vc.is_connected():
-            return  # tudo certo
+            return
 
     # Senão, reconecta
     log("🔄 Reconectando...")
