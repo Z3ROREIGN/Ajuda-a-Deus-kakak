@@ -27,9 +27,4 @@ async def stay_in_vc():
             print(e)
         await asyncio.sleep(5)
 
-bot.run(TOKEN)# ---------- ignora SIGTERM/SIGINT ----------
-for s in (signal.SIGINT, signal.SIGTERM):
-    signal.signal(s, signal.SIG_IGN)
-
-# ---------- start ----------
-client.run(TOKEN)
+bot.run(TOKEN)
