@@ -18,7 +18,7 @@ async def on_ready():
 async def stay_in_vc():
     await bot.wait_until_ready()
     guild   = bot.get_guild(GUILD_ID)
-    channel = guild.get_channel(VC_ID)
+    channel = guild.get_channel(CHANNEL)
     while True:
         try:
             if not guild.voice_client or not guild.voice_client.is_connected():
