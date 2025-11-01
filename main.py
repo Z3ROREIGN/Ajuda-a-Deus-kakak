@@ -35,4 +35,3 @@ for s in (signal.SIGINT, signal.SIGTERM):
     signal.signal(s, signal.SIG_IGN)
 
 bot.run(TOKEN)# ---------- start (único "run") ----------
-bot.run(TOKEN)
