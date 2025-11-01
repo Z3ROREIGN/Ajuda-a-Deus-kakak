@@ -3,38 +3,31 @@ import asyncio
 import discord
 from discord.ext import commands
 
-TOKEN   = os.getenv("TOKEN")          # Variável no Railway
-GUILD_ID = int(os.getenv("GUILD_ID"))  # ID do servidor
-CHANNEL   = int(os.getenv("CHANNEL"))     # ID do canal de voz
-PREFIX   = "!"                        # Prefixo para comandos opcionais
+TOKEN   = os.getenv("TOKEN")
+GUILD_ID = int(os.getenv("GUILD_ID"))
+CHANNEL   = int(os.getenv("CHANNEL"))
+PREFIX   = "!"
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=PREFIX, self_bot=True, intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f"✅ Logado como {bot.user}")
     bot.loop.create_task(stay_in_vc())
 
 async def stay_in_vc():
     await bot.wait_until_ready()
     guild   = bot.get_guild(GUILD_ID)
-    channel = guild.get_channel(CHANNEL) if guild else None
-    if not channel:
-        print("❌ Canal ou servidor não encontrado.")
-        return
-
+    channel = guild.get_channel(VC_ID)
     while True:
         try:
             if not guild.voice_client or not guild.voice_client.is_connected():
                 await channel.connect()
-                print("🔊 Reconectado ao canal de voz.")
         except Exception as e:
-            print(f"Erro ao reconectar: {e}")
-        await asyncio.sleep(5)  # Verifica a cada 5 s
+            print(e)
+        await asyncio.sleep(5)
 
-@bot.command()
-async def join(ctx):
+bot.run(TOKEN)async def join(ctx):
     """Entra no canal de voz do autor."""
     if ctx.author.voice and ctx.author.voice.channel:
         await ctx.author.voice.channel.connect()
